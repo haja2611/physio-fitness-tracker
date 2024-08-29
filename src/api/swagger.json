@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Exercise API",
+    "version": "1.0.0",
+    "description": "API for managing exercises"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Exercises",
+      "description": "Operations related to exercises"
+    }
+  ],
+  "paths": {
+    "/exercises": {
+      "get": {
+        "tags": ["Exercises"],
+        "summary": "Get a list of exercises",
+        "description": "Returns a list of exercises",
+        "responses": {
+          "200": {
+            "description": "A list of exercises",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Exercise"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/exercises/{id}": {
+      "get": {
+        "tags": ["Exercises"],
+        "summary": "Get an exercise by ID",
+        "description": "Returns a single exercise by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the exercise to retrieve",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exercise object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Exercise"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Exercise not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Exercise": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the exercise"
+          },
+          "exercise_id": {
+            "type": "string",
+            "description": "Exercise ID"
+          },
+          "bodyPart": {
+            "type": "string",
+            "description": "Body part targeted by the exercise"
+          },
+          "equipment": {
+            "type": "string",
+            "description": "Equipment used for the exercise"
+          },
+          "gifUrl": {
+            "type": "string",
+            "description": "URL of the GIF demonstrating the exercise"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the exercise"
+          },
+          "target": {
+            "type": "string",
+            "description": "Primary target of the exercise"
+          },
+          "secondaryMuscles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Secondary muscles involved in the exercise"
+          },
+          "instructions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Step-by-step instructions for performing the exercise"
+          },
+          "creation_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the exercise was created"
+          },
+          "updated_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date when the exercise was last updated"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "User who created the exercise"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "User who last updated the exercise"
+          }
+        }
+      }
+    }
+  }
+}

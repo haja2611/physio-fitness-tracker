@@ -1,0 +1,12 @@
+node_modules
+logs
+output
+download_gifs.js
+loadData.js
+neckresponse.json
+reset-password.html
+response-back.json
+testEnv.js
+insertData.js
+models1
+.env
